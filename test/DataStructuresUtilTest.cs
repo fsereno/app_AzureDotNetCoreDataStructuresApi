@@ -1,15 +1,15 @@
 using System.Collections;
 using Xunit;
 
-namespace FS.Test.DataStructuresUtilTest
+namespace FS.Test.Utils.DataStructuresUtilTest
 {
-    public interface ICollectionHandler<T>
+    public interface ICollectionsHandler<T>
     {
         void Add(T collection, string value);
         void Remove(T collection);
     }
 
-    public class StackHandler<T> : ICollectionHandler<T> where T : Stack
+    public class StackHandler<T> : ICollectionsHandler<T> where T : Stack
     {
         public void Add(T collection, string value)
         {
@@ -22,7 +22,7 @@ namespace FS.Test.DataStructuresUtilTest
         }
     }
 
-    public class QueueHandler<T> : ICollectionHandler<T> where T : Queue
+    public class QueueHandler<T> : ICollectionsHandler<T> where T : Queue
     {
         public void Add(T collection, string value)
         {
@@ -40,9 +40,9 @@ namespace FS.Test.DataStructuresUtilTest
         private readonly Queue _queue;
         private readonly Stack _stack;
 
-        private readonly ICollectionHandler<Queue> _queueHandler;
+        private readonly ICollectionsHandler<Queue> _queueHandler;
 
-        private readonly ICollectionHandler<Stack> _stackHandler;
+        private readonly ICollectionsHandler<Stack> _stackHandler;
 
         public DataStructuresUtilTest()
         {
