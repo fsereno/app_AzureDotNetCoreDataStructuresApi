@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Azure.Function
+namespace FS.Azure.Function
 {
     public static class DataStructuresHttpTriggerCSharp
     {

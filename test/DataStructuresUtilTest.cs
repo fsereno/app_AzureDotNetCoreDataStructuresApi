@@ -9,9 +9,7 @@ namespace FS.Test
     {
         private readonly Queue _queue;
         private readonly Stack _stack;
-
         private readonly ICollectionHandler<Queue> _queueHandler;
-
         private readonly ICollectionHandler<Stack> _stackHandler;
 
         public DataStructuresUtilTest()
