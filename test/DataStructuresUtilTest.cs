@@ -1,48 +1,18 @@
 using System.Collections;
+using FS.Interfaces;
+using FS.Utils;
 using Xunit;
 
-namespace FS.Test.Utils.DataStructuresUtilTest
+namespace FS.Test
 {
-    public interface ICollectionsHandler<T>
-    {
-        void Add(T collection, string value);
-        void Remove(T collection);
-    }
-
-    public class StackHandler<T> : ICollectionsHandler<T> where T : Stack
-    {
-        public void Add(T collection, string value)
-        {
-            collection.Push(value);
-        }
-
-        public void Remove(T collection)
-        {
-            collection.Pop();
-        }
-    }
-
-    public class QueueHandler<T> : ICollectionsHandler<T> where T : Queue
-    {
-        public void Add(T collection, string value)
-        {
-            collection.Enqueue(value);
-        }
-
-        public void Remove(T collection)
-        {
-            collection.Dequeue();
-        }
-    }
-
     public class DataStructuresUtilTest
     {
         private readonly Queue _queue;
         private readonly Stack _stack;
 
-        private readonly ICollectionsHandler<Queue> _queueHandler;
+        private readonly ICollectionHandler<Queue> _queueHandler;
 
-        private readonly ICollectionsHandler<Stack> _stackHandler;
+        private readonly ICollectionHandler<Stack> _stackHandler;
 
         public DataStructuresUtilTest()
         {
