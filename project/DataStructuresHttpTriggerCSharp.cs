@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -8,12 +9,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
+using FS.Interfaces;
+
 namespace FS.Azure.Function
 {
-    public static class DataStructuresHttpTriggerCSharp
+    public class DataStructuresHttpTriggerCSharp
     {
+        private readonly ICollectionHandler<Queue> _queueHandler;
+        private readonly ICollectionHandler<Stack> _stackHandler;
+        public DataStructuresHttpTriggerCSharp(ICollectionHandler<Queue> queueHandler, ICollectionHandler<Stack> stackHandler)
+        {
+            _queueHandler = queueHandler;
+            _stackHandler = stackHandler;
+        }
+
         [FunctionName("DataStructuresHttpTriggerCSharp")]
-        public static async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
@@ -28,6 +39,13 @@ namespace FS.Azure.Function
             string responseMessage = string.IsNullOrEmpty(name)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
+
+            var array = new string[] { "1", "2", "3"};
+            var queue = new Queue(array);
+            var stack = new Stack(array);
+
+            _queueHandler.Add(queue, "4");
+            _stackHandler.Add(stack, "4");
 
             return new OkObjectResult(responseMessage);
         }
