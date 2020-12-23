@@ -77,10 +77,9 @@ namespace FS.Azure.Function
             log.LogInformation("Remove the next item from the queue");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            dynamic data = JsonConvert.DeserializeObject<RemoveRequestBody>(requestBody);
 
-            var array = new string[] { "1", "2", "3"};
-            var queue = new Queue(array);
+            var queue = new Queue(data.Collection);
 
             _queueHandler.Remove(queue);
 
@@ -98,12 +97,11 @@ namespace FS.Azure.Function
             log.LogInformation("Adding an item to the stack");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            dynamic data = JsonConvert.DeserializeObject<AddRequestBody>(requestBody);
 
-            var array = new string[] { "1", "2"};
-            var stack = new Stack(array);
+            var stack = new Stack(data.Collection);
 
-            _stackHandler.Add(stack, "3");
+            _stackHandler.Add(stack, data.Item);
 
             var result = JsonConvert.SerializeObject(stack);
 
@@ -119,10 +117,9 @@ namespace FS.Azure.Function
             log.LogInformation("Remove the next item from the stack");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            dynamic data = JsonConvert.DeserializeObject<RemoveRequestBody>(requestBody);
 
-            var array = new string[] { "1", "2", "3"};
-            var stack = new Stack(array);
+            var stack = new Stack(data.Collection);
 
             _stackHandler.Remove(stack);
 

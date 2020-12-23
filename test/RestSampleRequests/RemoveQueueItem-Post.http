@@ -1,0 +1,4 @@
+POST http://localhost:7071/api/RemoveQueueItem HTTP/1.1
+content-type: application/json
+
+{ "collection":["1", "2", "3"]}
