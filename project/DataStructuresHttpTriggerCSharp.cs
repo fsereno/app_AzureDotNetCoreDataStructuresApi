@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 using FS.Interfaces;
+using FS.Models;
 
 namespace FS.Azure.Function
 {
@@ -57,12 +58,10 @@ namespace FS.Azure.Function
             log.LogInformation("Adding an item to the queue");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            dynamic data = JsonConvert.DeserializeObject<AddRequestBody>(requestBody);
 
-            var array = new string[] { "1", "2"};
-            var queue = new Queue(array);
-
-            _queueHandler.Add(queue, "3");
+            var queue = new Queue(data.Collection);
+            _queueHandler.Add(queue, data.Item);
 
             var result = JsonConvert.SerializeObject(queue);
 
