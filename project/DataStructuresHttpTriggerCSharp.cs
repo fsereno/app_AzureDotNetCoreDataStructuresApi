@@ -55,17 +55,28 @@ namespace FS.Azure.Function
         public async Task<IActionResult> AddQueueItem([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("Adding an item to the queue");
+            log.LogInformation("AddQueueItem endpoint hit");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject<AddRequestBody>(requestBody);
+            AddRequestBody data;
+            string result = string.Empty;
 
-            var queue = new Queue(data.Collection);
-            _queueHandler.Add(queue, data.Item);
+            using (StreamReader streamReader = new StreamReader(req.Body))
+            {
+                var request = await streamReader.ReadToEndAsync();
+                data = JsonConvert.DeserializeObject<AddRequestBody>(request);
+            }
 
-            var result = JsonConvert.SerializeObject(queue);
+            if (data != null) {
 
-            log.LogInformation("Added item to the queue");
+                log.LogInformation("Adding item to the queue");
+
+                var queue = new Queue(data.Collection);
+                _queueHandler.Add(queue, data.Item);
+
+                result = JsonConvert.SerializeObject(queue);
+
+                log.LogInformation("Added item to the queue");
+            }
 
             return new OkObjectResult(result);
         }
@@ -74,18 +85,28 @@ namespace FS.Azure.Function
         public async Task<IActionResult> RemoveQueueItem([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("Remove the next item from the queue");
+            log.LogInformation("RemoveQueueItem endpoint hit");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject<RemoveRequestBody>(requestBody);
+            AddRequestBody data;
+            string result = string.Empty;
 
-            var queue = new Queue(data.Collection);
+            using (StreamReader streamReader = new StreamReader(req.Body))
+            {
+                var request = await streamReader.ReadToEndAsync();
+                data = JsonConvert.DeserializeObject<AddRequestBody>(request);
+            }
 
-            _queueHandler.Remove(queue);
+            if (data != null) {
 
-            var result = JsonConvert.SerializeObject(queue);
+                log.LogInformation("Removing item to the queue");
 
-            log.LogInformation("Removed item from the queue");
+                var queue = new Queue(data.Collection);
+                _queueHandler.Remove(queue);
+
+                result = JsonConvert.SerializeObject(queue);
+
+                log.LogInformation("Removed item to the queue");
+            }
 
             return new OkObjectResult(result);
         }
@@ -94,18 +115,28 @@ namespace FS.Azure.Function
         public async Task<IActionResult> AddStackItem([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("Adding an item to the stack");
+            log.LogInformation("AddStackItem endpoint hit");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject<AddRequestBody>(requestBody);
+            AddRequestBody data;
+            string result = string.Empty;
 
-            var stack = new Stack(data.Collection);
+            using (StreamReader streamReader = new StreamReader(req.Body))
+            {
+                var request = await streamReader.ReadToEndAsync();
+                data = JsonConvert.DeserializeObject<AddRequestBody>(request);
+            }
 
-            _stackHandler.Add(stack, data.Item);
+            if (data != null) {
 
-            var result = JsonConvert.SerializeObject(stack);
+                log.LogInformation("Adding item to the stack");
 
-            log.LogInformation("Added item to the stack");
+                var stack = new Stack(data.Collection);
+                _stackHandler.Add(stack, data.Item);
+
+                result = JsonConvert.SerializeObject(stack);
+
+                log.LogInformation("Added item to the stack");
+            }
 
             return new OkObjectResult(result);
         }
@@ -114,18 +145,28 @@ namespace FS.Azure.Function
         public async Task<IActionResult> RemoveStackItem([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("Remove the next item from the stack");
+            log.LogInformation("RemoveStackItem endpoint hit");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject<RemoveRequestBody>(requestBody);
+            AddRequestBody data;
+            string result = string.Empty;
 
-            var stack = new Stack(data.Collection);
+            using (StreamReader streamReader = new StreamReader(req.Body))
+            {
+                var request = await streamReader.ReadToEndAsync();
+                data = JsonConvert.DeserializeObject<AddRequestBody>(request);
+            }
 
-            _stackHandler.Remove(stack);
+            if (data != null) {
 
-            var result = JsonConvert.SerializeObject(stack);
+                log.LogInformation("Removing item to the stack");
 
-            log.LogInformation("Removed item from the stack");
+                var stack = new Stack(data.Collection);
+                _stackHandler.Remove(stack);
+
+                result = JsonConvert.SerializeObject(stack);
+
+                log.LogInformation("Removed item to the stack");
+            }
 
             return new OkObjectResult(result);
         }
