@@ -1,4 +1,4 @@
-POST http://localhost:7071/api/AddQueueItem HTTP/1.1
+POST http://localhost:7071/api/AddQueueItemAsync HTTP/1.1
 content-type: application/json
 
 { "collection":["1", "2"], "item": "3" }
