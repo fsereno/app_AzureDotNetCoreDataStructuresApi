@@ -1,4 +1,4 @@
-namespace FS.Interfaces
+namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces
 {
     public interface ICollectionHandler<T>
     {

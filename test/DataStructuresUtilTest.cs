@@ -1,6 +1,6 @@
 using System.Collections;
-using FS.Interfaces;
-using FS.Utils;
+using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
+using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils;
 using Xunit;
 
 namespace FS.Test

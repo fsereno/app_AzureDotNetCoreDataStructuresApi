@@ -1,4 +1,4 @@
-namespace FS.Models
+namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Models
 {
     public class AddRequestBody
     {

@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-using FS.Interfaces;
-using FS.Models;
+using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
+using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Models;
 
-namespace FS.Azure.Function
+namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 {
     public class DataStructuresHttpTriggerCSharp
     {

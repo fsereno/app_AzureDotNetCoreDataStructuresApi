@@ -1,7 +1,7 @@
 using System.Collections;
-using FS.Interfaces;
+using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
 
-namespace FS.Utils
+namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
 {
     public class QueueHandler<T> : ICollectionHandler<T> where T : Queue
     {
