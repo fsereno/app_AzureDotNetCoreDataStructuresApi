@@ -50,6 +50,17 @@ namespace FS.Test
         }
 
         [Fact]
+        public void AddShouldAddItemToStackInCorrectOrder()
+        {
+            var stack = new Stack(new string[] { "1", "2" });
+            
+            _stackHandler.Add(stack, "3");
+
+            var result = stack.Peek();
+            Assert.Equal("3", result);
+        }
+
+        [Fact]
         public void RemoveShouldRemoveItemFromStack()
         {
             _stackHandler.Add(_stack, "Item 1");
@@ -57,6 +68,16 @@ namespace FS.Test
 
             var result = _stack.Count;
             Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void RemoveShouldRemoveItemFromStackInCorrectOrder()
+        {
+            var stack = new Stack(new string[] { "1", "2", "3" });
+            _stackHandler.Remove(stack);
+
+            var result = stack.Peek();
+            Assert.Equal("2", result);
         }
     }
 }
