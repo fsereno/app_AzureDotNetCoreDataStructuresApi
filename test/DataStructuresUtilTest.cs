@@ -53,7 +53,7 @@ namespace FS.Test
         public void AddShouldAddItemToStackInCorrectOrder()
         {
             var stack = new Stack(new string[] { "1", "2" });
-            
+
             _stackHandler.Add(stack, "3");
 
             var result = stack.Peek();
