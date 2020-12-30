@@ -14,11 +14,11 @@ namespace FS.Test
 
         public DataStructuresUtilTest()
         {
-            _queue = new Queue();
-            _stack = new Stack();
-
             _queueHandler = new QueueHandler<Queue>();
             _stackHandler = new StackHandler<Stack>();
+
+            _queue = _queueHandler.Create();
+            _stack = _stackHandler.Create();
         }
 
         [Fact]
@@ -28,6 +28,15 @@ namespace FS.Test
 
             var result = _queue.Count;
             Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void Add_ShouldNotErrorWhenNullIsPassedForQueue()
+        {
+            _queueHandler.Add(null, "Item 1");
+
+            var result = _queue.Count;
+            Assert.Equal(0, result);
         }
 
         [Fact]
@@ -47,6 +56,15 @@ namespace FS.Test
 
             var result = _stack.Count;
             Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void Add_ShouldNotErrorWhenNullIsPassedForStack()
+        {
+            _stackHandler.Add(null, "Item 1");
+
+            var result = _stack.Count;
+            Assert.Equal(0, result);
         }
 
         [Fact]
@@ -92,6 +110,18 @@ namespace FS.Test
             Assert.Equal("2", result);
         }
 
+        [Fact]
+        public void Create_ShouldCreateQueueWhenCollectionPassedIsNull()
+        {
+            Assert.IsType<Queue>(_queue);
+        }
+
+        [Fact]
+        public void Create_ShouldCreateStackWhenCollectionPassedIsNull()
+        {
+            Assert.IsType<Stack>(_stack);
+        }
+        
         [Fact]
         public void Create_ShouldCreateAStackAndRemoveInCorrectOrderIfInitialOrderIsReversed_LIFO()
         {

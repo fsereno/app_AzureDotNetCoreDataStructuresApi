@@ -15,6 +15,6 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces
         /// <param name="collection">Takes a collection of type T</param>
         void Remove(T collection);
 
-        T Create(string[] array);
+        T Create(string[] array = null);
     }
 }

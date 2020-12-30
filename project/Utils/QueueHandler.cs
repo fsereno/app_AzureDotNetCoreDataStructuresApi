@@ -7,21 +7,24 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
     {
         public void Add(T collection, string value)
         {
-            collection.Enqueue(value);
+            collection?.Enqueue(value);
         }
 
         public void Remove(T collection)
         {
-            collection.Dequeue();
+            collection?.Dequeue();
         }
 
-        public T Create(string[] array)
+        public T Create(string[] array = null)
         {
             var collection = new T();
 
-            for (var i = 0; i <  array.Length; i++)
+            if (array != null) 
             {
-                Add(collection, array[i]);
+                for (var i = 0; i <  array.Length; i++)
+                {
+                    Add(collection, array[i]);
+                }
             }
 
             return collection;
