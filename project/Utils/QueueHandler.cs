@@ -3,29 +3,24 @@ using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
 
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
 {
-    public class QueueHandler<T> : ICollectionHandler<T> where T : Queue, new()
+    public class QueueHandler : ICollectionHandler<Queue>
     {
-        public void Add(T collection, string value)
+        /// </inheritdoc>
+        public void Add(Queue collection, string value)
         {
             collection?.Enqueue(value);
         }
 
-        public void Remove(T collection)
+        /// </inheritdoc>
+        public void Remove(Queue collection)
         {
             collection?.Dequeue();
         }
 
-        public T Create(string[] array = null)
+        /// </inheritdoc>
+        public Queue Create(string[] array = null)
         {
-            var collection = new T();
-
-            if (array != null) 
-            {
-                for (var i = 0; i <  array.Length; i++)
-                {
-                    Add(collection, array[i]);
-                }
-            }
+            var collection = array != null ? new Queue(array) : new Queue();
 
             return collection;
         }

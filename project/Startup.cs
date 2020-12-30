@@ -11,8 +11,8 @@ namespace AzureFunctionDependencyInjection
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddScoped<ICollectionHandler<Queue>, QueueHandler<Queue>>();
-            builder.Services.AddScoped<ICollectionHandler<Stack>, StackHandler<Stack>>();
+            builder.Services.AddScoped<ICollectionHandler<Queue>, QueueHandler>();
+            builder.Services.AddScoped<ICollectionHandler<Stack>, StackHandler>();
         }
     }
 }

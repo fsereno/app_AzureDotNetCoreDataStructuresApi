@@ -3,23 +3,24 @@ using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
 
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
 {
-    public class StackHandler<T> : ICollectionHandler<T> where T : Stack, new()
+    public class StackHandler : ICollectionHandler<Stack>
     {
         /// </inheritdoc>
-        public void Add(T collection, string value)
+        public void Add(Stack collection, string value)
         {
             collection?.Push(value);
         }
 
         /// </inheritdoc>
-        public void Remove(T collection)
+        public void Remove(Stack collection)
         {
             collection?.Pop();
         }
 
-        public T Create(string[] array = null)
+        /// </inheritdoc>
+        public Stack Create(string[] array = null)
         {
-            var collection = new T();
+            var collection = new Stack();
 
             if (array != null)
             {

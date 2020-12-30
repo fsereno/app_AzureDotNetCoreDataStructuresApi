@@ -3,59 +3,17 @@ using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
 using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils;
 using Xunit;
 
-namespace FS.Test
+namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
 {
-    public class DataStructuresUtilTest
+    public class StackHandlerTest
     {
-        private readonly Queue _queue;
         private readonly Stack _stack;
-        private readonly ICollectionHandler<Queue> _queueHandler;
         private readonly ICollectionHandler<Stack> _stackHandler;
 
-        public DataStructuresUtilTest()
+        public StackHandlerTest()
         {
-            _queueHandler = new QueueHandler<Queue>();
-            _stackHandler = new StackHandler<Stack>();
-
-            _queue = _queueHandler.Create();
+            _stackHandler = new StackHandler();
             _stack = _stackHandler.Create();
-        }
-
-        [Fact]
-        public void Add_ShouldAddItemToQueue()
-        {
-            _queueHandler.Add(_queue, "Item 1");
-
-            var result = _queue.Count;
-            Assert.Equal(1, result);
-        }
-
-        [Fact]
-        public void Add_ShouldNotErrorWhenNullIsPassedForQueue()
-        {
-            _queueHandler.Add(null, "Item 1");
-
-            var result = _queue.Count;
-            Assert.Equal(0, result);
-        }
-
-        [Fact]
-        public void Remove_ShouldRemoveItemFromQueue()
-        {
-            _queueHandler.Add(_queue, "Item 1");
-            _queueHandler.Remove(_queue);
-
-            var result = _queue.Count;
-            Assert.Equal(0, result);
-        }
-
-        [Fact]
-        public void Remove_ShouldNotRemoveIfQueueIsNull()
-        {
-            _queueHandler.Remove(null);
-
-            var result = _queue.Count;
-            Assert.Equal(0, result);
         }
 
         [Fact]
@@ -87,7 +45,6 @@ namespace FS.Test
             Assert.Equal("3", result);
         }
 
-        // this may be invalid test
         [Fact]
         public void Add_ShouldAddItemToStackInCorrectOrderWhenOrderIsReversedAlready()
         {
@@ -129,17 +86,11 @@ namespace FS.Test
         }
 
         [Fact]
-        public void Create_ShouldCreateQueueWhenCollectionPassedIsNull()
-        {
-            Assert.IsType<Queue>(_queue);
-        }
-
-        [Fact]
         public void Create_ShouldCreateStackWhenCollectionPassedIsNull()
         {
             Assert.IsType<Stack>(_stack);
         }
-        
+
         [Fact]
         public void Create_ShouldCreateAStackAndRemoveInCorrectOrderIfInitialOrderIsReversed_LIFO()
         {
@@ -150,19 +101,6 @@ namespace FS.Test
             _stackHandler.Remove(stack);
 
             var result = stack.Peek();
-            Assert.Equal("2", result);
-        }
-
-        [Fact]
-        public void Create_ShouldCreateAQueueAndRemoveInTheCorrectOrder_FIFO()
-        {
-            var array = new string[] { "1", "2" };
-            var queue = _queueHandler.Create(array);
-
-            _queueHandler.Add(queue, "3");
-            _queueHandler.Remove(queue);
-
-            var result = queue.Peek();
             Assert.Equal("2", result);
         }
     }

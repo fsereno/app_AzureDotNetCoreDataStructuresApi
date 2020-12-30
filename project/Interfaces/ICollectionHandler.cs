@@ -15,6 +15,11 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces
         /// <param name="collection">Takes a collection of type T</param>
         void Remove(T collection);
 
+        /// <summary>
+        /// Creates a collection of type T
+        /// </summary>
+        /// <param name="array">The primitive array to create the collection from if not null</param>
+        /// <returns>Returns the collection of type T</returns>
         T Create(string[] array = null);
     }
 }
