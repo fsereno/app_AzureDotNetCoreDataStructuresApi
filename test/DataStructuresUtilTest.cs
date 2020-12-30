@@ -50,6 +50,15 @@ namespace FS.Test
         }
 
         [Fact]
+        public void Remove_ShouldNotRemoveIfQueueIsNull()
+        {
+            _queueHandler.Remove(null);
+
+            var result = _queue.Count;
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
         public void Add_ShouldAddItemToStack()
         {
             _stackHandler.Add(_stack, "Item 1");
@@ -95,6 +104,15 @@ namespace FS.Test
         {
             _stackHandler.Add(_stack, "Item 1");
             _stackHandler.Remove(_stack);
+
+            var result = _stack.Count;
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void Remove_ShouldNotRemoveIfStackIsNull()
+        {
+            _stackHandler.Remove(null);
 
             var result = _stack.Count;
             Assert.Equal(0, result);
