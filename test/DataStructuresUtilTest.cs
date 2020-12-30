@@ -22,7 +22,7 @@ namespace FS.Test
         }
 
         [Fact]
-        public void AddShouldAddItemToQueue()
+        public void Add_ShouldAddItemToQueue()
         {
             _queueHandler.Add(_queue, "Item 1");
 
@@ -31,7 +31,7 @@ namespace FS.Test
         }
 
         [Fact]
-        public void RemoveShouldRemoveItemFromQueue()
+        public void Remove_ShouldRemoveItemFromQueue()
         {
             _queueHandler.Add(_queue, "Item 1");
             _queueHandler.Remove(_queue);
@@ -41,7 +41,7 @@ namespace FS.Test
         }
 
         [Fact]
-        public void AddShouldAddItemToStack()
+        public void Add_ShouldAddItemToStack()
         {
             _stackHandler.Add(_stack, "Item 1");
 
@@ -50,9 +50,21 @@ namespace FS.Test
         }
 
         [Fact]
-        public void AddShouldAddItemToStackInCorrectOrder()
+        public void Add_ShouldAddItemToStackInCorrectOrder()
         {
             var stack = new Stack(new string[] { "1", "2" });
+
+            _stackHandler.Add(stack, "3"); // this results in 321
+
+            var result = stack.Peek();
+            Assert.Equal("3", result);
+        }
+
+        // this may be invalid test
+        [Fact]
+        public void Add_ShouldAddItemToStackInCorrectOrderWhenOrderIsReversedAlready()
+        {
+            var stack = new Stack(new string[] { "2", "1" });
 
             _stackHandler.Add(stack, "3");
 
@@ -61,7 +73,7 @@ namespace FS.Test
         }
 
         [Fact]
-        public void RemoveShouldRemoveItemFromStack()
+        public void Remove_ShouldRemoveItemFromStack()
         {
             _stackHandler.Add(_stack, "Item 1");
             _stackHandler.Remove(_stack);
@@ -71,12 +83,38 @@ namespace FS.Test
         }
 
         [Fact]
-        public void RemoveShouldRemoveItemFromStackInCorrectOrder()
+        public void Remove_ShouldRemoveItemFromStackInCorrectOrder()
         {
             var stack = new Stack(new string[] { "1", "2", "3" });
             _stackHandler.Remove(stack);
 
             var result = stack.Peek();
+            Assert.Equal("2", result);
+        }
+
+        [Fact]
+        public void Create_ShouldCreateAStackAndRemoveInCorrectOrderIfInitialOrderIsReversed_LIFO()
+        {
+            var array = new string[] { "2", "1" };
+            var stack = _stackHandler.Create(array);
+
+            _stackHandler.Add(stack, "3");
+            _stackHandler.Remove(stack);
+
+            var result = stack.Peek();
+            Assert.Equal("2", result);
+        }
+
+        [Fact]
+        public void Create_ShouldCreateAQueueAndRemoveInTheCorrectOrder_FIFO()
+        {
+            var array = new string[] { "1", "2" };
+            var queue = _queueHandler.Create(array);
+
+            _queueHandler.Add(queue, "3");
+            _queueHandler.Remove(queue);
+
+            var result = queue.Peek();
             Assert.Equal("2", result);
         }
     }

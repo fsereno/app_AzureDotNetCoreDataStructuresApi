@@ -3,7 +3,7 @@ using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
 
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
 {
-    public class StackHandler<T> : ICollectionHandler<T> where T : Stack
+    public class StackHandler<T> : ICollectionHandler<T> where T : Stack, new()
     {
         /// </inheritdoc>
         public void Add(T collection, string value)
@@ -15,6 +15,18 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
         public void Remove(T collection)
         {
             collection.Pop();
+        }
+
+        public T Create(string[] array)
+        {
+            var collection = new T();
+
+            for (var i = array.Length - 1; i >= 0; i--)
+            {
+                Add(collection, array[i]);
+            }
+
+            return collection;
         }
     }
 }

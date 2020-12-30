@@ -1,4 +1,4 @@
 POST http://localhost:7071/api/AddStackItemAsync HTTP/1.1
 content-type: application/json
 
-{ "collection":["1", "2"], "item": "3" }
+{ "collection":["2", "1"], "item": "3" }

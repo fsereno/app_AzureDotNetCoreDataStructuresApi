@@ -43,7 +43,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Adding item to the queue");
 
-                var queue = new Queue(data.Collection);
+                var queue = _queueHandler.Create(data.Collection);
                 _queueHandler.Add(queue, data.Item);
 
                 result = JsonConvert.SerializeObject(queue);
@@ -73,7 +73,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Removing item to the queue");
 
-                var queue = new Queue(data.Collection);
+                var queue = _queueHandler.Create(data.Collection);
                 _queueHandler.Remove(queue);
 
                 result = JsonConvert.SerializeObject(queue);
@@ -103,7 +103,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Adding item to the stack");
 
-                var stack = new Stack(data.Collection);
+                var stack = _stackHandler.Create(data.Collection);
                 _stackHandler.Add(stack, data.Item);
 
                 result = JsonConvert.SerializeObject(stack);
@@ -133,7 +133,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Removing item to the stack");
 
-                var stack = new Stack(data.Collection);
+                var stack = _stackHandler.Create(data.Collection);
                 _stackHandler.Remove(stack);
 
                 result = JsonConvert.SerializeObject(stack);
