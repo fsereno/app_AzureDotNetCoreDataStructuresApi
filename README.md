@@ -7,7 +7,7 @@ With this application I am demonstrating knowledge of the data structures, Queue
 
 Using Generics in .NET I have implemented an interface, which acts as the contract to allow for a polymorphic nature when instructing the Queue and Stack structures to add and remove items.
 
-- Portfolio Repository (https://github.com/fsereno/portfolio//tree/master/app/app_AzureDotNetCoreUniqueDataEntryApi)
+- Portfolio Repository (https://github.com/fsereno/portfolio/tree/master/app/app_AzureDotNetCoreDataStructuresApi)
 
 - Queue in .NET (https://docs.microsoft.com/en-us/dotnet/api/system.collections.queue?view=net-5.0)
 
@@ -15,7 +15,7 @@ Using Generics in .NET I have implemented an interface, which acts as the contra
 
 - Generics (https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/)
 
-### Project Commands ###
+### Project commands ###
 
 Build solution
 ```
