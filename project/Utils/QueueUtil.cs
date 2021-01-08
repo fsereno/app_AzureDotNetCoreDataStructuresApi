@@ -3,7 +3,7 @@ using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
 
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
 {
-    public class QueueHandler : ICollectionHandler<Queue>
+    public class QueueUtil : ICollectionUtil<Queue>
     {
         /// </inheritdoc>
         public void Add(Queue collection, string value)

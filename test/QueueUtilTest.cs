@@ -5,21 +5,21 @@ using Xunit;
 
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
 {
-    public class QueueHandlerTest
+    public class QueueUtilTest
     {
         private readonly Queue _queue;
-        private readonly ICollectionHandler<Queue> _queueHandler;
+        private readonly ICollectionUtil<Queue> _queueUtil;
 
-        public QueueHandlerTest()
+        public QueueUtilTest()
         {
-            _queueHandler = new QueueHandler();
-            _queue = _queueHandler.Create();
+            _queueUtil = new QueueUtil();
+            _queue = _queueUtil.Create();
         }
 
         [Fact]
         public void Add_ShouldAddItemToQueue()
         {
-            _queueHandler.Add(_queue, "Item 1");
+            _queueUtil.Add(_queue, "Item 1");
 
             var result = _queue.Count;
             Assert.Equal(1, result);
@@ -28,7 +28,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         [Fact]
         public void Add_ShouldNotErrorWhenNullIsPassedForQueue()
         {
-            _queueHandler.Add(null, "Item 1");
+            _queueUtil.Add(null, "Item 1");
 
             var result = _queue.Count;
             Assert.Equal(0, result);
@@ -37,8 +37,8 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         [Fact]
         public void Remove_ShouldRemoveItemFromQueue()
         {
-            _queueHandler.Add(_queue, "Item 1");
-            _queueHandler.Remove(_queue);
+            _queueUtil.Add(_queue, "Item 1");
+            _queueUtil.Remove(_queue);
 
             var result = _queue.Count;
             Assert.Equal(0, result);
@@ -47,7 +47,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         [Fact]
         public void Remove_ShouldNotRemoveIfQueueIsNull()
         {
-            _queueHandler.Remove(null);
+            _queueUtil.Remove(null);
 
             var result = _queue.Count;
             Assert.Equal(0, result);
@@ -63,10 +63,10 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         public void Create_ShouldCreateAQueueAndRemoveInTheCorrectOrder_FIFO()
         {
             var array = new string[] { "1", "2" };
-            var queue = _queueHandler.Create(array);
+            var queue = _queueUtil.Create(array);
 
-            _queueHandler.Add(queue, "3");
-            _queueHandler.Remove(queue);
+            _queueUtil.Add(queue, "3");
+            _queueUtil.Remove(queue);
 
             var result = queue.Peek();
             Assert.Equal("2", result);

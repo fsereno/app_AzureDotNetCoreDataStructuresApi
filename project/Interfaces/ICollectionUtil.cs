@@ -1,6 +1,6 @@
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces
 {
-    public interface ICollectionHandler<T>
+    public interface ICollectionUtil<T>
     {
         /// <summary>
         /// Adds an item to the collection

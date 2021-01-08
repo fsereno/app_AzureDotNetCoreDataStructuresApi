@@ -3,7 +3,7 @@ using FabioSereno.App_AzureDotNetCoreDataStructuresApi.Interfaces;
 
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Utils
 {
-    public class StackHandler : ICollectionHandler<Stack>
+    public class StackUtil : ICollectionUtil<Stack>
     {
         /// </inheritdoc>
         public void Add(Stack collection, string value)

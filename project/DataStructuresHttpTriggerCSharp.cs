@@ -16,12 +16,12 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 {
     public class DataStructuresHttpTriggerCSharp
     {
-        private readonly ICollectionHandler<Queue> _queueHandler;
-        private readonly ICollectionHandler<Stack> _stackHandler;
-        public DataStructuresHttpTriggerCSharp(ICollectionHandler<Queue> queueHandler, ICollectionHandler<Stack> stackHandler)
+        private readonly ICollectionUtil<Queue> _queueUtil;
+        private readonly ICollectionUtil<Stack> _stackUtil;
+        public DataStructuresHttpTriggerCSharp(ICollectionUtil<Queue> queueUtil, ICollectionUtil<Stack> stackUtil)
         {
-            _queueHandler = queueHandler;
-            _stackHandler = stackHandler;
+            _queueUtil = queueUtil;
+            _stackUtil = stackUtil;
         }
 
         [FunctionName("AddQueueItemAsync")]
@@ -43,8 +43,8 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Adding item to the queue");
 
-                var queue = _queueHandler.Create(data.Collection);
-                _queueHandler.Add(queue, data.Item);
+                var queue = _queueUtil.Create(data.Collection);
+                _queueUtil.Add(queue, data.Item);
 
                 result = JsonConvert.SerializeObject(queue);
 
@@ -73,8 +73,8 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Removing item to the queue");
 
-                var queue = _queueHandler.Create(data.Collection);
-                _queueHandler.Remove(queue);
+                var queue = _queueUtil.Create(data.Collection);
+                _queueUtil.Remove(queue);
 
                 result = JsonConvert.SerializeObject(queue);
 
@@ -103,8 +103,8 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Adding item to the stack");
 
-                var stack = _stackHandler.Create(data.Collection);
-                _stackHandler.Add(stack, data.Item);
+                var stack = _stackUtil.Create(data.Collection);
+                _stackUtil.Add(stack, data.Item);
 
                 result = JsonConvert.SerializeObject(stack);
 
@@ -133,8 +133,8 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Azure.Function
 
                 log.LogInformation("Removing item to the stack");
 
-                var stack = _stackHandler.Create(data.Collection);
-                _stackHandler.Remove(stack);
+                var stack = _stackUtil.Create(data.Collection);
+                _stackUtil.Remove(stack);
 
                 result = JsonConvert.SerializeObject(stack);
 

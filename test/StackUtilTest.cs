@@ -5,21 +5,21 @@ using Xunit;
 
 namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
 {
-    public class StackHandlerTest
+    public class StackUtilTest
     {
         private readonly Stack _stack;
-        private readonly ICollectionHandler<Stack> _stackHandler;
+        private readonly ICollectionUtil<Stack> _queueUtil;
 
-        public StackHandlerTest()
+        public StackUtilTest()
         {
-            _stackHandler = new StackHandler();
-            _stack = _stackHandler.Create();
+            _queueUtil = new StackUtil();
+            _stack = _queueUtil.Create();
         }
 
         [Fact]
         public void Add_ShouldAddItemToStack()
         {
-            _stackHandler.Add(_stack, "Item 1");
+            _queueUtil.Add(_stack, "Item 1");
 
             var result = _stack.Count;
             Assert.Equal(1, result);
@@ -28,7 +28,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         [Fact]
         public void Add_ShouldNotErrorWhenNullIsPassedForStack()
         {
-            _stackHandler.Add(null, "Item 1");
+            _queueUtil.Add(null, "Item 1");
 
             var result = _stack.Count;
             Assert.Equal(0, result);
@@ -39,7 +39,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         {
             var stack = new Stack(new string[] { "1", "2" });
 
-            _stackHandler.Add(stack, "3"); // this results in 321
+            _queueUtil.Add(stack, "3"); // this results in 321
 
             var result = stack.Peek();
             Assert.Equal("3", result);
@@ -50,7 +50,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         {
             var stack = new Stack(new string[] { "2", "1" });
 
-            _stackHandler.Add(stack, "3");
+            _queueUtil.Add(stack, "3");
 
             var result = stack.Peek();
             Assert.Equal("3", result);
@@ -59,8 +59,8 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         [Fact]
         public void Remove_ShouldRemoveItemFromStack()
         {
-            _stackHandler.Add(_stack, "Item 1");
-            _stackHandler.Remove(_stack);
+            _queueUtil.Add(_stack, "Item 1");
+            _queueUtil.Remove(_stack);
 
             var result = _stack.Count;
             Assert.Equal(0, result);
@@ -69,7 +69,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         [Fact]
         public void Remove_ShouldNotRemoveIfStackIsNull()
         {
-            _stackHandler.Remove(null);
+            _queueUtil.Remove(null);
 
             var result = _stack.Count;
             Assert.Equal(0, result);
@@ -79,7 +79,7 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         public void Remove_ShouldRemoveItemFromStackInCorrectOrder()
         {
             var stack = new Stack(new string[] { "1", "2", "3" });
-            _stackHandler.Remove(stack);
+            _queueUtil.Remove(stack);
 
             var result = stack.Peek();
             Assert.Equal("2", result);
@@ -95,10 +95,10 @@ namespace FabioSereno.App_AzureDotNetCoreDataStructuresApi.Test
         public void Create_ShouldCreateAStackAndRemoveInCorrectOrderIfInitialOrderIsReversed_LIFO()
         {
             var array = new string[] { "2", "1" };
-            var stack = _stackHandler.Create(array);
+            var stack = _queueUtil.Create(array);
 
-            _stackHandler.Add(stack, "3");
-            _stackHandler.Remove(stack);
+            _queueUtil.Add(stack, "3");
+            _queueUtil.Remove(stack);
 
             var result = stack.Peek();
             Assert.Equal("2", result);
